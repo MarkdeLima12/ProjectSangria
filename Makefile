@@ -32,4 +32,4 @@ run: $(TARGET)
 	./$(TARGET)
 
 memcheck: $(TARGET)
-	valgrind ./$(TARGET)
+	valgrind --leak-check=full ./$(TARGET)
