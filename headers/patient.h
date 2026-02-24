@@ -13,41 +13,62 @@ typedef enum PatientStatus{
     STATUS_FAIR = 2,
     STATUS_SERIOUS = 3,
     STATUS_CRITICAL = 4,
-    STATUS_DECEASED = 5
+    STATUS_DECEASED = 6,
+    STATUS_UNKNOWN = 5,
 } PatientStatus;
 
 // Enum for the type of Data coming in
 typedef enum SensorType{
-    STYPE_AGE = 0,
     STYPE_STATUS = 1,
     STYPE_HR = 2,
     STYPE_O2 = 3,
-    STYPE_BLOOD_PRESSURE = 4,
-    STYPE_HEART_RHYTHM = 5,
-    STYPE_RESP_RATE = 6,
-    STYPE_TEMPERATURE = 7
+    STYPE_RESP_RATE = 4,
+    STYPE_TEMPERATURE = 5
 } SensorType;
 
 // Struct for the patient and its data
 typedef struct Patient {
-    unsigned char ID;
     unsigned char age;
     PatientStatus status;
-    int HR;
-    int O2;
-    int bloodPressure;
-    int heartRhythm;
-    int respRate;
-    int temp;
-    struct Patient *next; // so they can be connected as a DLL
-    struct Patient *prev;
+    unsigned char HR;
+    unsigned char O2;
+    unsigned char respRate;
+    unsigned char temp;
 } Patient;
 
-void initPatient();
-void processData();
-void addData(SensorType type, int data);
-bool isFull();
+/*
+ * Creates a new patient in memory
+ * All chars = 255
+ * All pointers = NULL
+ */
+void initPatient(Patient *patient);
 
+/*
+ * Processes data and calls addData with correct type
+ * Message structure XX;X;XX\0 => PatientID;SensorID;SensorVal\0
+ * @param message | raw message data to be processed
+ * @param arr | patient array that we use for addData
+ */
+void processData(Patient *arr, char *message);
 
+/*
+ * memcpys the data in the correct spot based on the SensorType
+ * @param patient | patient struct to update
+ * @param type | Sensor the data was collected from
+ * @param data | pointer to beginning of correct chunk of raw message
+ */
+void addData(Patient *patient, SensorType type, void* data);
+
+/*
+ * Prints all patient fields in a readable format.
+ * @param patient | patient to print
+ */
+void printPatient(Patient *patient);
+
+/*
+ * Sends Data to the LLM
+ * @param patientID | bs int variable used for making the print statement nice
+ */
+void sendData(int patientID);
 
 #endif //LIQUIDANALYTICSTECHNICAL_PATIENTDATA_H
