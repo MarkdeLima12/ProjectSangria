@@ -44,30 +44,29 @@ RingBuffer* initBuffer() {
 
 void bufferWrite(RingBuffer *ringBuffer, char *message) {
     // Error checks
-    if (ringBuffer == NULL) {
+    if (!ringBuffer) {
         printf("RingBuffer NULL pointer\n");
         return;
     }
-    if (message == NULL) {
+    if (!message) {
         printf("Message NULL pointer\n");
         return;
     }
-    if (ringBuffer->bufferSize >8) {
-        printf("Buffer full\n");
-        return;
-    }
+    // if (ringBuffer->bufferSize >8) {
+    //     printf("Buffer full\n");
+    //     return;
+    // }
 
     // Create New Node
-    BufferNode *newNode;
-    newNode = (BufferNode *)malloc(sizeof(BufferNode));
-    if (newNode == NULL) {
+    BufferNode *newNode = malloc(sizeof(BufferNode));
+    if (!newNode) {
         printf("Malloc Failed");
         return;
     }
 
     // Copy message to new node
     newNode->message = copyMessage(message);
-    if (newNode->message == NULL) {
+    if (!newNode->message) {
         free(newNode);
         printf("Message NULL pointer\n");
         return;
@@ -91,7 +90,7 @@ void bufferWrite(RingBuffer *ringBuffer, char *message) {
 
 char *bufferRead(RingBuffer *ringBuffer) {
     // Error checks
-    if (ringBuffer == NULL) {
+    if (!ringBuffer) {
         printf("RingBuffer NULL pointer\n");
         return NULL;
     }
@@ -99,7 +98,7 @@ char *bufferRead(RingBuffer *ringBuffer) {
         printf("Buffer Empty\n");
         return NULL;
     }
-    if (ringBuffer->read == NULL || ringBuffer->write == NULL) {
+    if (!ringBuffer->read || !ringBuffer->write) {
         ringBuffer->bufferSize = 0;
         printf("Buffer Empty\n");
         return NULL;
@@ -134,10 +133,20 @@ char *bufferRead(RingBuffer *ringBuffer) {
 }
 
 void freeBufferNode(BufferNode *node) {
-    if (node == NULL) {
-        return;
+    if (node) {
+        free(node->message);
+        free(node);
     }
+}
 
-    free(node->message);
-    free(node);
+void freeRingBuffer(RingBuffer **buffer) {
+    if (buffer && *buffer) {
+        while ((*buffer)->bufferSize > 0) {
+            char *message = bufferRead(*buffer);
+            free(message);
+        }
+
+        free(*buffer);
+        *buffer = NULL;
+    }
 }
