@@ -4,7 +4,6 @@
 
 #ifndef LIQUIDANALYTICSTECHNICAL_PATIENTDATA_H
 #define LIQUIDANALYTICSTECHNICAL_PATIENTDATA_H
-#include <stdbool.h>
 
 // Enum for the status of a patient
 typedef enum PatientStatus{
