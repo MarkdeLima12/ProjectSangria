@@ -52,6 +52,9 @@ stable behavior while handling telemetry streams such as status, HR, O2, respira
 - No data cleaning is performed in this component; values are ingested, mapped, stored, and forwarded.
 - Only sensors listed in Connected Devices are in current v1 scope.
 - If a patient dies, messages received from their sensors are no longer processed.
+- During regular production, the ring buffer will be capped at a size of 8 (64 bytes total) with the option to scale as
+  needed. The number 8 was picked because it was a nice number and didn't take up too much space, but also allowed the
+  buffer to be a suitable size for storing queued messages.
 
 #### Runtime and Throughput Assumptions
 
@@ -60,28 +63,25 @@ stable behavior while handling telemetry streams such as status, HR, O2, respira
   `Print` phases separately.
 - Expected scale assumption is up to `1280` concurrently reporting sensors, with publish intervals ranging from `0.1s`
   to `3 minutes`.
+- Data is tagged with the patients ID and sensor ID. There are no ordering guarantees or requirements for ordering
+- Data Presented to the LLM is a snapshot of the most recent data collected for each stored value. The LLM will connect
+  to the DB for previous data from
+  the patient.
+- At the moment, processing capabilities are much faster than writing capabilities. Given the processing requirements of
+  the broker, buffer overflow should not be an issue. If this were to be scaled up, there would likely be the need for a
+  buffer overflow policy. The suggested implementation is to remove older data from a duplicate Sensor and Patient (e.g.
+  Sarah;HeartRate;82 would be deleted if Sarah;HeartRate;85 comes in.)
+- We will not be printing to the console, but packaging up a msg and writing to another buffer. As
+  such, printing to the terminal should not be considered in the processing stage
+- Multiple sensors are sending to one buffer and then the broker is the only one reading from the buffer.
 
 #### Open Questions (Still Unanswered)
 
-- What exact output schema is sent to the LLM (field names, types, units, and versioning)?
-- Is downstream submission one latest value per metric, or a time-window/array payload?
-- Are ordering guarantees required globally, per patient, or per sensor stream?
-- What buffer overflow policy is required in production (`drop oldest`, `drop newest`, `block`, or `backpressure`)?
 - What concurrency model is required for ingestion (`SPSC`, `MPSC`, `MPMC`)?
 - What memory ceiling (MB/GB) is acceptable under peak load?
-- What availability target applies (SLA uptime, tolerated drop rate, recovery time objective)?
 - What is the concrete delivery path from this module to the LLM in production (direct MQTT topic contract vs
   intermediary API/service)?
-- What is the timeline for prototype freeze vs production readiness?
-
-#### Additional Clarification Questions Based on Current README + Code
-
-- Should ring buffer capacity be fixed (for example size `8`, as documented) or effectively unbounded (current limit
-  check is commented out)?
-- Should benchmark runs include console printing time? `printPatient()` and `sendData()` I/O can dominate timing and
-  hide ingestion performance.
-- Should random test message generation use deterministic seeding for reproducible benchmarks?
-- Should status values be validated before assignment (for example rejecting unknown enum values outside expected
+- Are status values validated before assignment (for example rejecting unknown enum values outside expected
   range)?
 
 ### System Overview
@@ -326,3 +326,24 @@ Fill in the values below after running your tests.
 - I/O included in timing (`yes/no`): Yes for `Print` phase (stdout output)
 - Any bottlenecks observed: Frequent allocation/copy/free in ring buffer message handling and console I/O during
   printing are expected hotspots
+
+### Scaling
+
+#### Sensor Collection
+
+When we think about scaling up sensor collection to fit the scale of a large hospital (500+ beds), there will be
+collisions and potential processing issues. Here are some ways to help alleviate those issues:
+
+- Setting up smaller that smaller groups of sensors feed into. The main buffer that connects to the broker then reads
+  one from each buffer, in order, then repeats.
+- Creating custom brokers that handle smaller sets, but more sensors including specialized sensors.
+
+#### Processing Scaling
+
+When we scale up sensor collection, and maybe specialize it, this may lead to more processing requirements. Here are
+some suggestions to alleviate that.
+
+- One large "main buffer" that has smaller buffers within it, responsible for specialized sensor collection. Two brokers
+  that do specialized processing and select nodes from specific browsers.
+- One main buffer attached to a load balancer that distributes messages between a cluster brokers that process the data
+  as they are handed them. This can be scaled up and down as needed.
