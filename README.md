@@ -4,15 +4,14 @@
 
 Etobicoke General Hospital is an understaffed, over capacity hospital in North Etobicoke serving much of Toronto's
 lowest income families. Similar to hospitals across Ontario, they have been suffering from staffing burnout, shortages,
-and less than a 100% replacement rate. This makes it difficult for medical staff to monitor all their patient at once,
-especially as intake numbers rise. Its facility, across many floors and departments, have multiple patients between
-its ICUs, CCUs, NICUs, and ERs that need constant monitoring and health checks. Each patient has multiple IoT
+and less than a 100% replacement rate. This makes it difficult for medical staff to monitor all their patients at once,
+especially as intake numbers continue to rise. Its facility, across many floors and departments, has multiple patients
+between its ICUs, CCUs, NICUs, and ERs that need constant monitoring and health checks. Each patient has multiple IoT
 monitors enabled, but only some need constant monitoring. The Province has invested money in an AI powered LLM that
-will monitor and report on the status of patients,
-based on data collected from their IoT health monitoring devices. The system will collect the most recent data from
-patients, process the data, and send a status update to the medical team in-charge of that division. The LLM is
-currently being tested, but it will need a low-level, interfacing module that can process the data collected from the
-sensors and send it to the LLM.
+will monitor and report on the status of patients, based on data collected from their IoT health monitoring devices.
+The system will collect the most recent data from patients, process the data, and send a status update to the medical
+team in-charge of that division. The LLM is currently being tested, but it will need a low-level, MQTT interfacing
+module that can process the data collected from the sensors and send it to the LLM.
 
 ### Problem Statement
 
@@ -21,7 +20,7 @@ Monitor") that captures health metrics from thousands of sensors and prepares da
 detection monitor. This component should serve as a "broker" of information, collecting the information from the
 various sensors and loading it into a queue.
 
-The core deliverable is a high-performance message ring buffer (`FMBuf`) with `push()`/`pop()` style
+The core deliverable is the broker core: a high-performance message ring buffer (`FMBuf`) with `push()`/`pop()` style
 behavior (implemented here as write/read APIs), designed to:
 
 - sustain very high throughput under typical server workloads,
@@ -37,8 +36,10 @@ stable behavior while handling telemetry streams such as status, HR, O2, respira
 
 #### Protocol and Integration Assumptions
 
-- MQTT is still a target integration path, but this repository currently has no MQTT client/server implementation.
-- Any MQTT statements in this document are design assumptions only (not behavior implemented in `main.c` / `src/*.c`).
+- This module is intended to operate as the ingestion/normalization broker core in an MQTT-based telemetry system.
+- Sensor data is expected to enter from MQTT topics, be normalized/queued by this broker core, then be forwarded to
+  downstream MQTT subscribers.
+- In this repository, MQTT transport calls are represented by stubs and local simulation paths in `main.c`.
 - Historical persistence is assumed to be external to this module.
 
 #### Data and Processing Assumptions
@@ -61,25 +62,25 @@ stable behavior while handling telemetry streams such as status, HR, O2, respira
 
 ### System Overview
 
-This project models a simple patient-data ingestion pipeline with two main modules:
+This project models the core broker stage in a patient-data MQTT pipeline with two main modules:
 
 - `ringBufferAPI` handles message queueing using a ring buffer.
 - `patient` handles patient state, field initialization, updates, and display.
 
-Current code-path data flow:
+Current broker-core code-path data flow:
 
-- `main.c` generates synthetic telemetry payloads and writes them to the ring buffer.
+- `main.c` simulates MQTT ingress by generating synthetic telemetry payloads and writing them to the ring buffer.
 - Buffered messages are read and parsed by `processData(...)`.
 - Parsed values are mapped to patient fields via `addData(...)`.
-- `sendData(...)` and `printPatient(...)` run after processing for each patient entry.
+- `sendData(...)` and `printPatient(...)` simulate broker egress/reporting after processing.
 
-Production MQTT data-flow target:
+MQTT broker data flow:
 
 - Sensors publish telemetry to MQTT topics.
-- The ingestion module consumes those messages and places payloads into the ring buffer.
+- This broker core consumes those messages and places payloads into the ring buffer.
 - Buffered data is processed into patient state updates.
-- Updated patient state is published to MQTT for the LLM.
-- The LLM publishes status updates back to MQTT, and those are re-ingested into the patient model.
+- Updated patient state is published by the broker to MQTT for the LLM.
+- The LLM publishes status updates back to MQTT, and the broker re-ingests those updates into the patient model.
 
 High-level flow:
 
@@ -87,7 +88,7 @@ High-level flow:
 2. Initialize a `Patient` array (max. 256 entries).
 3. Write incoming sensor messages into the buffer.
 4. Read/process buffered messages and update patient fields.
-5. Send (print) patient data for reporting.
+5. Publish/send patient data for reporting.
 
 ### Data Model
 
@@ -204,12 +205,13 @@ Design intent:
 - Linked-node circular structure with dynamic growth in current code path (capacity check is commented out)
 - Explicit memory ownership and cleanup
 
-### MQTT Integration Notes
+### MQTT Broker Notes
 
 Current intended MQTT behavior for this project:
 
-- MQTT retained-message behavior and QoS settings are design targets, not implemented behavior in this repository.
-- Note: current C code simulates ingestion and processing locally and does not include an MQTT client library.
+- The codebase represents the broker core logic (ingest queueing + parse + state update + egress stub).
+- MQTT retained-message behavior and QoS settings are deployment-level concerns for the surrounding transport layer.
+- Note: current C code simulates ingress/egress in-process and does not include an MQTT client library.
 
 ### Connected Devices
 
@@ -240,6 +242,8 @@ Devices connected to the system that publish and subscribe to data:
 
 #### Information Flow
 
+![MQTT Subscriber/Publisher Chart](./Project_Sangria_MQTT_Data_flow.png)
+
 ### Print Behavior
 
 `printPatient(Patient *patient)` prints a formatted patient snapshot.
@@ -247,16 +251,16 @@ Devices connected to the system that publish and subscribe to data:
 - Fields equal to `255` are displayed as `UNKNOWN` as this is the default value.
 - Non-unknown fields print their numeric value.
 
-### Current Execution Pattern
+### Current Broker Execution Pattern
 
 Typical usage in `main`:
 
 1. Allocate ring buffer.
 2. Allocate/declare `Patient patient[256]` storage array.
 3. Call `initPatient(patient)` to reset the patient array indices.
-4. Ingest with `bufferWrite(...)`.
+4. Simulate ingress with `bufferWrite(...)`.
 5. Process records (`bufferRead(...)` + parse + `addData(...)`).
-6. Print with `printPatient(&patient[i])`.
+6. Simulate egress/reporting with `sendData(i)` and `printPatient(&patient[i])`.
 7. Free resources alloc'd in main.
 
 ### Benchmark Testing
@@ -325,4 +329,3 @@ some suggestions to alleviate that.
   that do specialized processing and select nodes from specific browsers.
 - One main buffer attached to a load balancer that distributes messages between a cluster brokers that process the data
   as they are handed them. This can be scaled up and down as needed.
-
