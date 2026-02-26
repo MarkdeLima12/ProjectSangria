@@ -1,0 +1,1287 @@
+Copy of Terminal Out on Feb 26th, 2026
+
+root@cfe9b5ece4d1:/workspace# make run
+gcc -std=c11 -Wall -Wextra -O2 -Iheaders -c main.c -o main.o
+gcc main.o main2.o src/patient.o src/ringBufferAPI.o -o main
+./main
+Sending Patient 0 Data...
+Patient Data
+  Age: 7                  Status: GOOD (0)
+  HR: 155                 O2: 81
+  Resp Rate: 32   Temperature: 36
+Sending Patient 1 Data...
+Patient Data
+  Age: 17                 Status: STABLE (1)
+  HR: 203                 O2: 92
+  Resp Rate: 37   Temperature: 39
+Sending Patient 2 Data...
+Patient Data
+  Age: 31                 Status: STABLE (1)
+  HR: 193                 O2: 82
+  Resp Rate: 16   Temperature: 37
+Sending Patient 3 Data...
+Patient Data
+  Age: 96                 Status: STABLE (1)
+  HR: 118                 O2: 98
+  Resp Rate: 25   Temperature: 36
+Sending Patient 4 Data...
+Patient Data
+  Age: 20                 Status: FAIR (2)
+  HR: 132                 O2: 97
+  Resp Rate: 38   Temperature: 38
+Sending Patient 5 Data...
+Patient Data
+  Age: 62                 Status: CRITICAL (4)
+  HR: 178                 O2: 80
+  Resp Rate: 33   Temperature: 39
+Sending Patient 6 Data...
+Patient Data
+  Age: 77                 Status: CRITICAL (4)
+  HR: 245                 O2: 89
+  Resp Rate: 34   Temperature: 35
+Sending Patient 7 Data...
+Patient Data
+  Age: 94                 Status: CRITICAL (4)
+  HR: 88                  O2: 92
+  Resp Rate: 28   Temperature: 35
+Sending Patient 8 Data...
+Patient Data
+  Age: 12                 Status: SERIOUS (3)
+  HR: 215                 O2: 93
+  Resp Rate: 26   Temperature: 39
+Sending Patient 9 Data...
+Patient Data
+  Age: 60                 Status: FAIR (2)
+  HR: 46                  O2: 93
+  Resp Rate: 14   Temperature: 37
+Sending Patient 10 Data...
+Patient Data
+  Age: 71                 Status: FAIR (2)
+  HR: 183                 O2: 98
+  Resp Rate: 15   Temperature: 37
+Sending Patient 11 Data...
+Patient Data
+  Age: 4                  Status: FAIR (2)
+  HR: 82                  O2: 95
+  Resp Rate: 25   Temperature: 38
+Sending Patient 12 Data...
+Patient Data
+  Age: 5                  Status: STABLE (1)
+  HR: 213                 O2: 82
+  Resp Rate: 22   Temperature: 37
+Sending Patient 13 Data...
+Patient Data
+  Age: 19                 Status: STABLE (1)
+  HR: 92                  O2: 99
+  Resp Rate: 17   Temperature: 36
+Sending Patient 14 Data...
+Patient Data
+  Age: 87                 Status: GOOD (0)
+  HR: 146                 O2: 95
+  Resp Rate: 16   Temperature: 38
+Sending Patient 15 Data...
+Patient Data
+  Age: 10                 Status: GOOD (0)
+  HR: 169                 O2: 88
+  Resp Rate: 18   Temperature: 38
+Sending Patient 16 Data...
+Patient Data
+  Age: 65                 Status: FAIR (2)
+  HR: 45                  O2: 82
+  Resp Rate: 25   Temperature: 38
+Sending Patient 17 Data...
+Patient Data
+  Age: 81                 Status: CRITICAL (4)
+  HR: 83                  O2: 89
+  Resp Rate: 15   Temperature: 38
+Sending Patient 18 Data...
+Patient Data
+  Age: 9                  Status: FAIR (2)
+  HR: 41                  O2: 81
+  Resp Rate: 26   Temperature: 37
+Sending Patient 19 Data...
+Patient Data
+  Age: 4                  Status: FAIR (2)
+  HR: 160                 O2: 87
+  Resp Rate: 28   Temperature: 37
+Sending Patient 20 Data...
+Patient Data
+  Age: 9                  Status: STABLE (1)
+  HR: 76                  O2: 92
+  Resp Rate: 25   Temperature: 36
+Sending Patient 21 Data...
+Patient Data
+  Age: 31                 Status: CRITICAL (4)
+  HR: 85                  O2: 81
+  Resp Rate: 18   Temperature: 35
+Sending Patient 22 Data...
+Patient Data
+  Age: 93                 Status: CRITICAL (4)
+  HR: 92                  O2: 86
+  Resp Rate: 20   Temperature: 35
+Sending Patient 23 Data...
+Patient Data
+  Age: 34                 Status: SERIOUS (3)
+  HR: 201                 O2: 92
+  Resp Rate: 18   Temperature: 36
+Sending Patient 24 Data...
+Patient Data
+  Age: 89                 Status: GOOD (0)
+  HR: 55                  O2: 99
+  Resp Rate: 37   Temperature: 37
+Sending Patient 25 Data...
+Patient Data
+  Age: 38                 Status: STABLE (1)
+  HR: 211                 O2: 81
+  Resp Rate: 39   Temperature: 37
+Sending Patient 26 Data...
+Patient Data
+  Age: 14                 Status: FAIR (2)
+  HR: 111                 O2: 83
+  Resp Rate: 36   Temperature: 36
+Sending Patient 27 Data...
+Patient Data
+  Age: 10                 Status: FAIR (2)
+  HR: 242                 O2: 81
+  Resp Rate: 25   Temperature: 38
+Sending Patient 28 Data...
+Patient Data
+  Age: 75                 Status: GOOD (0)
+  HR: 219                 O2: 85
+  Resp Rate: 38   Temperature: 38
+Sending Patient 29 Data...
+Patient Data
+  Age: 65                 Status: STABLE (1)
+  HR: 223                 O2: 85
+  Resp Rate: 23   Temperature: 35
+Sending Patient 30 Data...
+Patient Data
+  Age: 3                  Status: GOOD (0)
+  HR: 174                 O2: 95
+  Resp Rate: 29   Temperature: 39
+Sending Patient 31 Data...
+Patient Data
+  Age: 83                 Status: GOOD (0)
+  HR: 235                 O2: 87
+  Resp Rate: 19   Temperature: 35
+Sending Patient 32 Data...
+Patient Data
+  Age: 82                 Status: STABLE (1)
+  HR: 160                 O2: 81
+  Resp Rate: 39   Temperature: 39
+Sending Patient 33 Data...
+Patient Data
+  Age: 34                 Status: SERIOUS (3)
+  HR: 49                  O2: 84
+  Resp Rate: 12   Temperature: 35
+Sending Patient 34 Data...
+Patient Data
+  Age: 78                 Status: STABLE (1)
+  HR: 59                  O2: 90
+  Resp Rate: 14   Temperature: 35
+Sending Patient 35 Data...
+Patient Data
+  Age: 1                  Status: STABLE (1)
+  HR: 243                 O2: 82
+  Resp Rate: 38   Temperature: 39
+Sending Patient 36 Data...
+Patient Data
+  Age: 62                 Status: GOOD (0)
+  HR: 85                  O2: 98
+  Resp Rate: 21   Temperature: 37
+Sending Patient 37 Data...
+Patient Data
+  Age: 20                 Status: SERIOUS (3)
+  HR: 222                 O2: 94
+  Resp Rate: 28   Temperature: 35
+Sending Patient 38 Data...
+Patient Data
+  Age: 96                 Status: STABLE (1)
+  HR: 110                 O2: 92
+  Resp Rate: 12   Temperature: 39
+Sending Patient 39 Data...
+Patient Data
+  Age: 40                 Status: SERIOUS (3)
+  HR: 104                 O2: 84
+  Resp Rate: 37   Temperature: 36
+Sending Patient 40 Data...
+Patient Data
+  Age: 80                 Status: CRITICAL (4)
+  HR: 92                  O2: 85
+  Resp Rate: 13   Temperature: 36
+Sending Patient 41 Data...
+Patient Data
+  Age: 66                 Status: SERIOUS (3)
+  HR: 237                 O2: 84
+  Resp Rate: 27   Temperature: 36
+Sending Patient 42 Data...
+Patient Data
+  Age: 44                 Status: STABLE (1)
+  HR: 239                 O2: 89
+  Resp Rate: 17   Temperature: 35
+Sending Patient 43 Data...
+Patient Data
+  Age: 85                 Status: CRITICAL (4)
+  HR: 130                 O2: 98
+  Resp Rate: 39   Temperature: 36
+Sending Patient 44 Data...
+Patient Data
+  Age: 85                 Status: STABLE (1)
+  HR: 216                 O2: 94
+  Resp Rate: 24   Temperature: 37
+Sending Patient 45 Data...
+Patient Data
+  Age: 30                 Status: SERIOUS (3)
+  HR: 77                  O2: 88
+  Resp Rate: 18   Temperature: 37
+Sending Patient 46 Data...
+Patient Data
+  Age: 61                 Status: CRITICAL (4)
+  HR: 141                 O2: 81
+  Resp Rate: 29   Temperature: 38
+Sending Patient 47 Data...
+Patient Data
+  Age: 15                 Status: GOOD (0)
+  HR: 56                  O2: 94
+  Resp Rate: 19   Temperature: 38
+Sending Patient 48 Data...
+Patient Data
+  Age: 77                 Status: GOOD (0)
+  HR: 72                  O2: 99
+  Resp Rate: 31   Temperature: 36
+Sending Patient 49 Data...
+Patient Data
+  Age: 70                 Status: FAIR (2)
+  HR: 221                 O2: 91
+  Resp Rate: 33   Temperature: 38
+Sending Patient 50 Data...
+Patient Data
+  Age: 86                 Status: SERIOUS (3)
+  HR: 61                  O2: 80
+  Resp Rate: 21   Temperature: 38
+Sending Patient 51 Data...
+Patient Data
+  Age: 86                 Status: SERIOUS (3)
+  HR: 225                 O2: 99
+  Resp Rate: 16   Temperature: 39
+Sending Patient 52 Data...
+Patient Data
+  Age: 1                  Status: GOOD (0)
+  HR: 210                 O2: 86
+  Resp Rate: 31   Temperature: 37
+Sending Patient 53 Data...
+Patient Data
+  Age: 79                 Status: FAIR (2)
+  HR: 239                 O2: 96
+  Resp Rate: 25   Temperature: 36
+Sending Patient 54 Data...
+Patient Data
+  Age: 86                 Status: CRITICAL (4)
+  HR: 242                 O2: 99
+  Resp Rate: 38   Temperature: 36
+Sending Patient 55 Data...
+Patient Data
+  Age: 90                 Status: GOOD (0)
+  HR: 106                 O2: 86
+  Resp Rate: 14   Temperature: 39
+Sending Patient 56 Data...
+Patient Data
+  Age: 83                 Status: GOOD (0)
+  HR: 184                 O2: 85
+  Resp Rate: 20   Temperature: 39
+Sending Patient 57 Data...
+Patient Data
+  Age: 66                 Status: CRITICAL (4)
+  HR: 175                 O2: 83
+  Resp Rate: 32   Temperature: 35
+Sending Patient 58 Data...
+Patient Data
+  Age: 66                 Status: CRITICAL (4)
+  HR: 167                 O2: 88
+  Resp Rate: 39   Temperature: 36
+Sending Patient 59 Data...
+Patient Data
+  Age: 57                 Status: SERIOUS (3)
+  HR: 163                 O2: 81
+  Resp Rate: 14   Temperature: 37
+Sending Patient 60 Data...
+Patient Data
+  Age: 30                 Status: GOOD (0)
+  HR: 179                 O2: 88
+  Resp Rate: 20   Temperature: 37
+Sending Patient 61 Data...
+Patient Data
+  Age: 70                 Status: CRITICAL (4)
+  HR: 187                 O2: 86
+  Resp Rate: 30   Temperature: 38
+Sending Patient 62 Data...
+Patient Data
+  Age: 5                  Status: SERIOUS (3)
+  HR: 213                 O2: 99
+  Resp Rate: 38   Temperature: 37
+Sending Patient 63 Data...
+Patient Data
+  Age: 12                 Status: SERIOUS (3)
+  HR: 229                 O2: 92
+  Resp Rate: 27   Temperature: 38
+Sending Patient 64 Data...
+Patient Data
+  Age: 70                 Status: FAIR (2)
+  HR: 88                  O2: 94
+  Resp Rate: 29   Temperature: 39
+Sending Patient 65 Data...
+Patient Data
+  Age: 49                 Status: SERIOUS (3)
+  HR: 71                  O2: 84
+  Resp Rate: 25   Temperature: 37
+Sending Patient 66 Data...
+Patient Data
+  Age: 80                 Status: FAIR (2)
+  HR: 179                 O2: 99
+  Resp Rate: 22   Temperature: 36
+Sending Patient 67 Data...
+Patient Data
+  Age: 99                 Status: SERIOUS (3)
+  HR: 110                 O2: 93
+  Resp Rate: 38   Temperature: 35
+Sending Patient 68 Data...
+Patient Data
+  Age: 69                 Status: CRITICAL (4)
+  HR: 140                 O2: 81
+  Resp Rate: 26   Temperature: 39
+Sending Patient 69 Data...
+Patient Data
+  Age: 41                 Status: FAIR (2)
+  HR: 155                 O2: 83
+  Resp Rate: 34   Temperature: 35
+Sending Patient 70 Data...
+Patient Data
+  Age: 38                 Status: FAIR (2)
+  HR: 117                 O2: 81
+  Resp Rate: 12   Temperature: 35
+Sending Patient 71 Data...
+Patient Data
+  Age: 48                 Status: FAIR (2)
+  HR: 40                  O2: 87
+  Resp Rate: 13   Temperature: 38
+Sending Patient 72 Data...
+Patient Data
+  Age: 6                  Status: FAIR (2)
+  HR: 73                  O2: 83
+  Resp Rate: 14   Temperature: 35
+Sending Patient 73 Data...
+Patient Data
+  Age: 49                 Status: FAIR (2)
+  HR: 40                  O2: 93
+  Resp Rate: 20   Temperature: 36
+Sending Patient 74 Data...
+Patient Data
+  Age: 99                 Status: GOOD (0)
+  HR: 165                 O2: 80
+  Resp Rate: 22   Temperature: 35
+Sending Patient 75 Data...
+Patient Data
+  Age: 57                 Status: CRITICAL (4)
+  HR: 47                  O2: 81
+  Resp Rate: 34   Temperature: 36
+Sending Patient 76 Data...
+Patient Data
+  Age: 45                 Status: SERIOUS (3)
+  HR: 161                 O2: 80
+  Resp Rate: 36   Temperature: 35
+Sending Patient 77 Data...
+Patient Data
+  Age: 59                 Status: GOOD (0)
+  HR: 241                 O2: 99
+  Resp Rate: 25   Temperature: 37
+Sending Patient 78 Data...
+Patient Data
+  Age: 38                 Status: SERIOUS (3)
+  HR: 245                 O2: 86
+  Resp Rate: 15   Temperature: 39
+Sending Patient 79 Data...
+Patient Data
+  Age: 22                 Status: GOOD (0)
+  HR: 67                  O2: 84
+  Resp Rate: 24   Temperature: 37
+Sending Patient 80 Data...
+Patient Data
+  Age: 29                 Status: CRITICAL (4)
+  HR: 239                 O2: 93
+  Resp Rate: 26   Temperature: 38
+Sending Patient 81 Data...
+Patient Data
+  Age: 24                 Status: SERIOUS (3)
+  HR: 224                 O2: 87
+  Resp Rate: 36   Temperature: 35
+Sending Patient 82 Data...
+Patient Data
+  Age: 74                 Status: SERIOUS (3)
+  HR: 163                 O2: 90
+  Resp Rate: 12   Temperature: 36
+Sending Patient 83 Data...
+Patient Data
+  Age: 97                 Status: GOOD (0)
+  HR: 121                 O2: 87
+  Resp Rate: 35   Temperature: 36
+Sending Patient 84 Data...
+Patient Data
+  Age: 69                 Status: GOOD (0)
+  HR: 136                 O2: 96
+  Resp Rate: 28   Temperature: 36
+Sending Patient 85 Data...
+Patient Data
+  Age: 60                 Status: SERIOUS (3)
+  HR: 98                  O2: 90
+  Resp Rate: 39   Temperature: 39
+Sending Patient 86 Data...
+Patient Data
+  Age: 52                 Status: STABLE (1)
+  HR: 58                  O2: 93
+  Resp Rate: 35   Temperature: 39
+Sending Patient 87 Data...
+Patient Data
+  Age: 51                 Status: FAIR (2)
+  HR: 44                  O2: 91
+  Resp Rate: 31   Temperature: 39
+Sending Patient 88 Data...
+Patient Data
+  Age: 92                 Status: CRITICAL (4)
+  HR: 93                  O2: 88
+  Resp Rate: 15   Temperature: 39
+Sending Patient 89 Data...
+Patient Data
+  Age: 17                 Status: FAIR (2)
+  HR: 239                 O2: 91
+  Resp Rate: 17   Temperature: 38
+Sending Patient 90 Data...
+Patient Data
+  Age: 74                 Status: SERIOUS (3)
+  HR: 163                 O2: 81
+  Resp Rate: 17   Temperature: 36
+Sending Patient 91 Data...
+Patient Data
+  Age: 22                 Status: STABLE (1)
+  HR: 238                 O2: 82
+  Resp Rate: 34   Temperature: 38
+Sending Patient 92 Data...
+Patient Data
+  Age: 53                 Status: CRITICAL (4)
+  HR: 79                  O2: 87
+  Resp Rate: 32   Temperature: 35
+Sending Patient 93 Data...
+Patient Data
+  Age: 46                 Status: CRITICAL (4)
+  HR: 65                  O2: 98
+  Resp Rate: 26   Temperature: 35
+Sending Patient 94 Data...
+Patient Data
+  Age: 0                  Status: GOOD (0)
+  HR: 144                 O2: 91
+  Resp Rate: 17   Temperature: 36
+Sending Patient 95 Data...
+Patient Data
+  Age: 23                 Status: FAIR (2)
+  HR: 218                 O2: 93
+  Resp Rate: 35   Temperature: 37
+Sending Patient 96 Data...
+Patient Data
+  Age: 95                 Status: CRITICAL (4)
+  HR: 53                  O2: 90
+  Resp Rate: 16   Temperature: 39
+Sending Patient 97 Data...
+Patient Data
+  Age: 46                 Status: CRITICAL (4)
+  HR: 231                 O2: 90
+  Resp Rate: 31   Temperature: 39
+Sending Patient 98 Data...
+Patient Data
+  Age: 88                 Status: SERIOUS (3)
+  HR: 98                  O2: 80
+  Resp Rate: 16   Temperature: 37
+Sending Patient 99 Data...
+Patient Data
+  Age: 30                 Status: CRITICAL (4)
+  HR: 212                 O2: 89
+  Resp Rate: 33   Temperature: 37
+Sending Patient 100 Data...
+Patient Data
+  Age: 88                 Status: CRITICAL (4)
+  HR: 216                 O2: 89
+  Resp Rate: 31   Temperature: 37
+Sending Patient 101 Data...
+Patient Data
+  Age: 92                 Status: CRITICAL (4)
+  HR: 216                 O2: 99
+  Resp Rate: 32   Temperature: 35
+Sending Patient 102 Data...
+Patient Data
+  Age: 44                 Status: CRITICAL (4)
+  HR: 187                 O2: 80
+  Resp Rate: 39   Temperature: 37
+Sending Patient 103 Data...
+Patient Data
+  Age: 60                 Status: GOOD (0)
+  HR: 236                 O2: 88
+  Resp Rate: 18   Temperature: 35
+Sending Patient 104 Data...
+Patient Data
+  Age: 40                 Status: SERIOUS (3)
+  HR: 234                 O2: 81
+  Resp Rate: 35   Temperature: 39
+Sending Patient 105 Data...
+Patient Data
+  Age: 9                  Status: GOOD (0)
+  HR: 59                  O2: 89
+  Resp Rate: 39   Temperature: 38
+Sending Patient 106 Data...
+Patient Data
+  Age: 84                 Status: STABLE (1)
+  HR: 185                 O2: 82
+  Resp Rate: 22   Temperature: 36
+Sending Patient 107 Data...
+Patient Data
+  Age: 86                 Status: FAIR (2)
+  HR: 199                 O2: 82
+  Resp Rate: 35   Temperature: 38
+Sending Patient 108 Data...
+Patient Data
+  Age: 68                 Status: STABLE (1)
+  HR: 162                 O2: 82
+  Resp Rate: 25   Temperature: 37
+Sending Patient 109 Data...
+Patient Data
+  Age: 21                 Status: STABLE (1)
+  HR: 164                 O2: 93
+  Resp Rate: 39   Temperature: 35
+Sending Patient 110 Data...
+Patient Data
+  Age: 74                 Status: SERIOUS (3)
+  HR: 104                 O2: 83
+  Resp Rate: 19   Temperature: 35
+Sending Patient 111 Data...
+Patient Data
+  Age: 63                 Status: CRITICAL (4)
+  HR: 146                 O2: 91
+  Resp Rate: 36   Temperature: 38
+Sending Patient 112 Data...
+Patient Data
+  Age: 45                 Status: FAIR (2)
+  HR: 224                 O2: 92
+  Resp Rate: 38   Temperature: 36
+Sending Patient 113 Data...
+Patient Data
+  Age: 47                 Status: GOOD (0)
+  HR: 149                 O2: 86
+  Resp Rate: 16   Temperature: 36
+Sending Patient 114 Data...
+Patient Data
+  Age: 25                 Status: GOOD (0)
+  HR: 187                 O2: 94
+  Resp Rate: 36   Temperature: 38
+Sending Patient 115 Data...
+Patient Data
+  Age: 80                 Status: STABLE (1)
+  HR: 77                  O2: 92
+  Resp Rate: 32   Temperature: 36
+Sending Patient 116 Data...
+Patient Data
+  Age: 73                 Status: GOOD (0)
+  HR: 80                  O2: 96
+  Resp Rate: 20   Temperature: 36
+Sending Patient 117 Data...
+Patient Data
+  Age: 77                 Status: SERIOUS (3)
+  HR: 240                 O2: 93
+  Resp Rate: 14   Temperature: 38
+Sending Patient 118 Data...
+Patient Data
+  Age: 30                 Status: SERIOUS (3)
+  HR: 87                  O2: 88
+  Resp Rate: 27   Temperature: 37
+Sending Patient 119 Data...
+Patient Data
+  Age: 31                 Status: STABLE (1)
+  HR: 117                 O2: 83
+  Resp Rate: 17   Temperature: 36
+Sending Patient 120 Data...
+Patient Data
+  Age: 95                 Status: GOOD (0)
+  HR: 217                 O2: 97
+  Resp Rate: 35   Temperature: 36
+Sending Patient 121 Data...
+Patient Data
+  Age: 71                 Status: STABLE (1)
+  HR: 222                 O2: 94
+  Resp Rate: 31   Temperature: 36
+Sending Patient 122 Data...
+Patient Data
+  Age: 53                 Status: FAIR (2)
+  HR: 248                 O2: 93
+  Resp Rate: 27   Temperature: 35
+Sending Patient 123 Data...
+Patient Data
+  Age: 13                 Status: STABLE (1)
+  HR: 144                 O2: 81
+  Resp Rate: 13   Temperature: 35
+Sending Patient 124 Data...
+Patient Data
+  Age: 16                 Status: GOOD (0)
+  HR: 186                 O2: 83
+  Resp Rate: 20   Temperature: 35
+Sending Patient 125 Data...
+Patient Data
+  Age: 19                 Status: SERIOUS (3)
+  HR: 42                  O2: 84
+  Resp Rate: 26   Temperature: 38
+Sending Patient 126 Data...
+Patient Data
+  Age: 36                 Status: STABLE (1)
+  HR: 116                 O2: 82
+  Resp Rate: 14   Temperature: 38
+Sending Patient 127 Data...
+Patient Data
+  Age: 10                 Status: FAIR (2)
+  HR: 90                  O2: 97
+  Resp Rate: 19   Temperature: 38
+Sending Patient 128 Data...
+Patient Data
+  Age: 65                 Status: CRITICAL (4)
+  HR: 182                 O2: 80
+  Resp Rate: 12   Temperature: 39
+Sending Patient 129 Data...
+Patient Data
+  Age: 90                 Status: FAIR (2)
+  HR: 50                  O2: 99
+  Resp Rate: 16   Temperature: 37
+Sending Patient 130 Data...
+Patient Data
+  Age: 6                  Status: GOOD (0)
+  HR: 145                 O2: 98
+  Resp Rate: 24   Temperature: 36
+Sending Patient 131 Data...
+Patient Data
+  Age: 52                 Status: FAIR (2)
+  HR: 249                 O2: 96
+  Resp Rate: 31   Temperature: 37
+Sending Patient 132 Data...
+Patient Data
+  Age: 82                 Status: CRITICAL (4)
+  HR: 108                 O2: 84
+  Resp Rate: 29   Temperature: 36
+Sending Patient 133 Data...
+Patient Data
+  Age: 51                 Status: STABLE (1)
+  HR: 83                  O2: 86
+  Resp Rate: 23   Temperature: 38
+Sending Patient 134 Data...
+Patient Data
+  Age: 12                 Status: SERIOUS (3)
+  HR: 204                 O2: 98
+  Resp Rate: 33   Temperature: 35
+Sending Patient 135 Data...
+Patient Data
+  Age: 88                 Status: GOOD (0)
+  HR: 204                 O2: 85
+  Resp Rate: 22   Temperature: 38
+Sending Patient 136 Data...
+Patient Data
+  Age: 60                 Status: SERIOUS (3)
+  HR: 47                  O2: 83
+  Resp Rate: 18   Temperature: 38
+Sending Patient 137 Data...
+Patient Data
+  Age: 96                 Status: STABLE (1)
+  HR: 136                 O2: 82
+  Resp Rate: 19   Temperature: 39
+Sending Patient 138 Data...
+Patient Data
+  Age: 39                 Status: CRITICAL (4)
+  HR: 219                 O2: 96
+  Resp Rate: 14   Temperature: 39
+Sending Patient 139 Data...
+Patient Data
+  Age: 94                 Status: CRITICAL (4)
+  HR: 134                 O2: 91
+  Resp Rate: 19   Temperature: 37
+Sending Patient 140 Data...
+Patient Data
+  Age: 83                 Status: SERIOUS (3)
+  HR: 119                 O2: 98
+  Resp Rate: 19   Temperature: 37
+Sending Patient 141 Data...
+Patient Data
+  Age: 12                 Status: GOOD (0)
+  HR: 158                 O2: 91
+  Resp Rate: 18   Temperature: 37
+Sending Patient 142 Data...
+Patient Data
+  Age: 23                 Status: STABLE (1)
+  HR: 137                 O2: 96
+  Resp Rate: 16   Temperature: 35
+Sending Patient 143 Data...
+Patient Data
+  Age: 28                 Status: CRITICAL (4)
+  HR: 199                 O2: 89
+  Resp Rate: 39   Temperature: 38
+Sending Patient 144 Data...
+Patient Data
+  Age: 26                 Status: CRITICAL (4)
+  HR: 131                 O2: 99
+  Resp Rate: 27   Temperature: 38
+Sending Patient 145 Data...
+Patient Data
+  Age: 48                 Status: FAIR (2)
+  HR: 149                 O2: 86
+  Resp Rate: 36   Temperature: 38
+Sending Patient 146 Data...
+Patient Data
+  Age: 7                  Status: STABLE (1)
+  HR: 236                 O2: 91
+  Resp Rate: 24   Temperature: 36
+Sending Patient 147 Data...
+Patient Data
+  Age: 65                 Status: FAIR (2)
+  HR: 222                 O2: 95
+  Resp Rate: 21   Temperature: 38
+Sending Patient 148 Data...
+Patient Data
+  Age: 25                 Status: SERIOUS (3)
+  HR: 152                 O2: 87
+  Resp Rate: 30   Temperature: 37
+Sending Patient 149 Data...
+Patient Data
+  Age: 4                  Status: FAIR (2)
+  HR: 71                  O2: 90
+  Resp Rate: 28   Temperature: 37
+Sending Patient 150 Data...
+Patient Data
+  Age: 96                 Status: FAIR (2)
+  HR: 161                 O2: 84
+  Resp Rate: 14   Temperature: 38
+Sending Patient 151 Data...
+Patient Data
+  Age: 86                 Status: CRITICAL (4)
+  HR: 49                  O2: 81
+  Resp Rate: 32   Temperature: 36
+Sending Patient 152 Data...
+Patient Data
+  Age: 75                 Status: CRITICAL (4)
+  HR: 205                 O2: 91
+  Resp Rate: 22   Temperature: 37
+Sending Patient 153 Data...
+Patient Data
+  Age: 14                 Status: GOOD (0)
+  HR: 79                  O2: 80
+  Resp Rate: 24   Temperature: 37
+Sending Patient 154 Data...
+Patient Data
+  Age: 99                 Status: SERIOUS (3)
+  HR: 54                  O2: 90
+  Resp Rate: 23   Temperature: 39
+Sending Patient 155 Data...
+Patient Data
+  Age: 57                 Status: CRITICAL (4)
+  HR: 86                  O2: 87
+  Resp Rate: 31   Temperature: 36
+Sending Patient 156 Data...
+Patient Data
+  Age: 33                 Status: FAIR (2)
+  HR: 56                  O2: 90
+  Resp Rate: 23   Temperature: 39
+Sending Patient 157 Data...
+Patient Data
+  Age: 1                  Status: SERIOUS (3)
+  HR: 92                  O2: 97
+  Resp Rate: 31   Temperature: 35
+Sending Patient 158 Data...
+Patient Data
+  Age: 33                 Status: STABLE (1)
+  HR: 220                 O2: 88
+  Resp Rate: 29   Temperature: 36
+Sending Patient 159 Data...
+Patient Data
+  Age: 99                 Status: CRITICAL (4)
+  HR: 66                  O2: 93
+  Resp Rate: 23   Temperature: 36
+Sending Patient 160 Data...
+Patient Data
+  Age: 57                 Status: GOOD (0)
+  HR: 214                 O2: 87
+  Resp Rate: 25   Temperature: 39
+Sending Patient 161 Data...
+Patient Data
+  Age: 40                 Status: SERIOUS (3)
+  HR: 41                  O2: 91
+  Resp Rate: 26   Temperature: 35
+Sending Patient 162 Data...
+Patient Data
+  Age: 16                 Status: GOOD (0)
+  HR: 174                 O2: 94
+  Resp Rate: 14   Temperature: 37
+Sending Patient 163 Data...
+Patient Data
+  Age: 38                 Status: FAIR (2)
+  HR: 147                 O2: 94
+  Resp Rate: 17   Temperature: 39
+Sending Patient 164 Data...
+Patient Data
+  Age: 91                 Status: GOOD (0)
+  HR: 126                 O2: 98
+  Resp Rate: 29   Temperature: 37
+Sending Patient 165 Data...
+Patient Data
+  Age: 95                 Status: SERIOUS (3)
+  HR: 117                 O2: 93
+  Resp Rate: 23   Temperature: 35
+Sending Patient 166 Data...
+Patient Data
+  Age: 93                 Status: CRITICAL (4)
+  HR: 54                  O2: 85
+  Resp Rate: 26   Temperature: 37
+Sending Patient 167 Data...
+Patient Data
+  Age: 16                 Status: GOOD (0)
+  HR: 130                 O2: 80
+  Resp Rate: 27   Temperature: 35
+Sending Patient 168 Data...
+Patient Data
+  Age: 56                 Status: SERIOUS (3)
+  HR: 243                 O2: 94
+  Resp Rate: 16   Temperature: 36
+Sending Patient 169 Data...
+Patient Data
+  Age: 31                 Status: CRITICAL (4)
+  HR: 68                  O2: 92
+  Resp Rate: 32   Temperature: 37
+Sending Patient 170 Data...
+Patient Data
+  Age: 9                  Status: GOOD (0)
+  HR: 201                 O2: 96
+  Resp Rate: 19   Temperature: 38
+Sending Patient 171 Data...
+Patient Data
+  Age: 39                 Status: CRITICAL (4)
+  HR: 200                 O2: 87
+  Resp Rate: 28   Temperature: 37
+Sending Patient 172 Data...
+Patient Data
+  Age: 10                 Status: CRITICAL (4)
+  HR: 63                  O2: 82
+  Resp Rate: 35   Temperature: 39
+Sending Patient 173 Data...
+Patient Data
+  Age: 32                 Status: GOOD (0)
+  HR: 221                 O2: 92
+  Resp Rate: 26   Temperature: 37
+Sending Patient 174 Data...
+Patient Data
+  Age: 67                 Status: CRITICAL (4)
+  HR: 40                  O2: 88
+  Resp Rate: 12   Temperature: 37
+Sending Patient 175 Data...
+Patient Data
+  Age: 36                 Status: CRITICAL (4)
+  HR: 134                 O2: 95
+  Resp Rate: 20   Temperature: 37
+Sending Patient 176 Data...
+Patient Data
+  Age: 47                 Status: SERIOUS (3)
+  HR: 180                 O2: 84
+  Resp Rate: 19   Temperature: 39
+Sending Patient 177 Data...
+Patient Data
+  Age: 40                 Status: STABLE (1)
+  HR: 219                 O2: 96
+  Resp Rate: 17   Temperature: 36
+Sending Patient 178 Data...
+Patient Data
+  Age: 67                 Status: SERIOUS (3)
+  HR: 156                 O2: 96
+  Resp Rate: 30   Temperature: 39
+Sending Patient 179 Data...
+Patient Data
+  Age: 72                 Status: FAIR (2)
+  HR: 102                 O2: 91
+  Resp Rate: 35   Temperature: 38
+Sending Patient 180 Data...
+Patient Data
+  Age: 10                 Status: SERIOUS (3)
+  HR: 201                 O2: 91
+  Resp Rate: 31   Temperature: 37
+Sending Patient 181 Data...
+Patient Data
+  Age: 63                 Status: STABLE (1)
+  HR: 148                 O2: 90
+  Resp Rate: 39   Temperature: 39
+Sending Patient 182 Data...
+Patient Data
+  Age: 23                 Status: FAIR (2)
+  HR: 240                 O2: 94
+  Resp Rate: 30   Temperature: 36
+Sending Patient 183 Data...
+Patient Data
+  Age: 51                 Status: FAIR (2)
+  HR: 222                 O2: 84
+  Resp Rate: 33   Temperature: 35
+Sending Patient 184 Data...
+Patient Data
+  Age: 77                 Status: GOOD (0)
+  HR: 65                  O2: 99
+  Resp Rate: 20   Temperature: 38
+Sending Patient 185 Data...
+Patient Data
+  Age: 88                 Status: STABLE (1)
+  HR: 56                  O2: 97
+  Resp Rate: 13   Temperature: 38
+Sending Patient 186 Data...
+Patient Data
+  Age: 7                  Status: CRITICAL (4)
+  HR: 107                 O2: 97
+  Resp Rate: 19   Temperature: 35
+Sending Patient 187 Data...
+Patient Data
+  Age: 77                 Status: SERIOUS (3)
+  HR: 169                 O2: 97
+  Resp Rate: 22   Temperature: 39
+Sending Patient 188 Data...
+Patient Data
+  Age: 55                 Status: CRITICAL (4)
+  HR: 211                 O2: 86
+  Resp Rate: 27   Temperature: 37
+Sending Patient 189 Data...
+Patient Data
+  Age: 41                 Status: GOOD (0)
+  HR: 58                  O2: 96
+  Resp Rate: 16   Temperature: 35
+Sending Patient 190 Data...
+Patient Data
+  Age: 41                 Status: GOOD (0)
+  HR: 49                  O2: 80
+  Resp Rate: 36   Temperature: 38
+Sending Patient 191 Data...
+Patient Data
+  Age: 12                 Status: STABLE (1)
+  HR: 146                 O2: 90
+  Resp Rate: 33   Temperature: 39
+Sending Patient 192 Data...
+Patient Data
+  Age: 81                 Status: FAIR (2)
+  HR: 229                 O2: 94
+  Resp Rate: 37   Temperature: 35
+Sending Patient 193 Data...
+Patient Data
+  Age: 57                 Status: STABLE (1)
+  HR: 103                 O2: 82
+  Resp Rate: 24   Temperature: 38
+Sending Patient 194 Data...
+Patient Data
+  Age: 16                 Status: SERIOUS (3)
+  HR: 66                  O2: 95
+  Resp Rate: 31   Temperature: 37
+Sending Patient 195 Data...
+Patient Data
+  Age: 37                 Status: GOOD (0)
+  HR: 84                  O2: 97
+  Resp Rate: 18   Temperature: 36
+Sending Patient 196 Data...
+Patient Data
+  Age: 18                 Status: SERIOUS (3)
+  HR: 193                 O2: 91
+  Resp Rate: 22   Temperature: 35
+Sending Patient 197 Data...
+Patient Data
+  Age: 8                  Status: STABLE (1)
+  HR: 157                 O2: 81
+  Resp Rate: 19   Temperature: 37
+Sending Patient 198 Data...
+Patient Data
+  Age: 19                 Status: STABLE (1)
+  HR: 95                  O2: 88
+  Resp Rate: 19   Temperature: 36
+Sending Patient 199 Data...
+Patient Data
+  Age: 74                 Status: SERIOUS (3)
+  HR: 112                 O2: 88
+  Resp Rate: 30   Temperature: 37
+Sending Patient 200 Data...
+Patient Data
+  Age: 40                 Status: GOOD (0)
+  HR: 99                  O2: 93
+  Resp Rate: 36   Temperature: 35
+Sending Patient 201 Data...
+Patient Data
+  Age: 28                 Status: GOOD (0)
+  HR: 40                  O2: 82
+  Resp Rate: 17   Temperature: 35
+Sending Patient 202 Data...
+Patient Data
+  Age: 12                 Status: GOOD (0)
+  HR: 180                 O2: 81
+  Resp Rate: 22   Temperature: 35
+Sending Patient 203 Data...
+Patient Data
+  Age: 50                 Status: FAIR (2)
+  HR: 114                 O2: 88
+  Resp Rate: 23   Temperature: 36
+Sending Patient 204 Data...
+Patient Data
+  Age: 27                 Status: FAIR (2)
+  HR: 62                  O2: 94
+  Resp Rate: 37   Temperature: 35
+Sending Patient 205 Data...
+Patient Data
+  Age: 45                 Status: FAIR (2)
+  HR: 106                 O2: 80
+  Resp Rate: 31   Temperature: 38
+Sending Patient 206 Data...
+Patient Data
+  Age: 52                 Status: FAIR (2)
+  HR: 70                  O2: 97
+  Resp Rate: 35   Temperature: 37
+Sending Patient 207 Data...
+Patient Data
+  Age: 40                 Status: SERIOUS (3)
+  HR: 181                 O2: 87
+  Resp Rate: 39   Temperature: 39
+Sending Patient 208 Data...
+Patient Data
+  Age: 86                 Status: GOOD (0)
+  HR: 61                  O2: 99
+  Resp Rate: 31   Temperature: 37
+Sending Patient 209 Data...
+Patient Data
+  Age: 18                 Status: FAIR (2)
+  HR: 70                  O2: 84
+  Resp Rate: 38   Temperature: 37
+Sending Patient 210 Data...
+Patient Data
+  Age: 78                 Status: CRITICAL (4)
+  HR: 95                  O2: 82
+  Resp Rate: 31   Temperature: 38
+Sending Patient 211 Data...
+Patient Data
+  Age: 62                 Status: SERIOUS (3)
+  HR: 45                  O2: 96
+  Resp Rate: 39   Temperature: 39
+Sending Patient 212 Data...
+Patient Data
+  Age: 81                 Status: FAIR (2)
+  HR: 43                  O2: 87
+  Resp Rate: 36   Temperature: 36
+Sending Patient 213 Data...
+Patient Data
+  Age: 0                  Status: GOOD (0)
+  HR: 210                 O2: 87
+  Resp Rate: 36   Temperature: 37
+Sending Patient 214 Data...
+Patient Data
+  Age: 13                 Status: STABLE (1)
+  HR: 179                 O2: 80
+  Resp Rate: 13   Temperature: 39
+Sending Patient 215 Data...
+Patient Data
+  Age: 24                 Status: FAIR (2)
+  HR: 56                  O2: 96
+  Resp Rate: 29   Temperature: 37
+Sending Patient 216 Data...
+Patient Data
+  Age: 54                 Status: STABLE (1)
+  HR: 74                  O2: 97
+  Resp Rate: 25   Temperature: 37
+Sending Patient 217 Data...
+Patient Data
+  Age: 20                 Status: CRITICAL (4)
+  HR: 155                 O2: 89
+  Resp Rate: 18   Temperature: 38
+Sending Patient 218 Data...
+Patient Data
+  Age: 67                 Status: STABLE (1)
+  HR: 90                  O2: 86
+  Resp Rate: 15   Temperature: 38
+Sending Patient 219 Data...
+Patient Data
+  Age: 9                  Status: CRITICAL (4)
+  HR: 160                 O2: 91
+  Resp Rate: 18   Temperature: 37
+Sending Patient 220 Data...
+Patient Data
+  Age: 61                 Status: CRITICAL (4)
+  HR: 164                 O2: 99
+  Resp Rate: 21   Temperature: 38
+Sending Patient 221 Data...
+Patient Data
+  Age: 7                  Status: FAIR (2)
+  HR: 100                 O2: 84
+  Resp Rate: 24   Temperature: 35
+Sending Patient 222 Data...
+Patient Data
+  Age: 21                 Status: SERIOUS (3)
+  HR: 139                 O2: 90
+  Resp Rate: 25   Temperature: 35
+Sending Patient 223 Data...
+Patient Data
+  Age: 7                  Status: FAIR (2)
+  HR: 119                 O2: 80
+  Resp Rate: 22   Temperature: 37
+Sending Patient 224 Data...
+Patient Data
+  Age: 30                 Status: STABLE (1)
+  HR: 71                  O2: 96
+  Resp Rate: 20   Temperature: 37
+Sending Patient 225 Data...
+Patient Data
+  Age: 37                 Status: CRITICAL (4)
+  HR: 175                 O2: 98
+  Resp Rate: 30   Temperature: 38
+Sending Patient 226 Data...
+Patient Data
+  Age: 10                 Status: FAIR (2)
+  HR: 157                 O2: 93
+  Resp Rate: 31   Temperature: 37
+Sending Patient 227 Data...
+Patient Data
+  Age: 48                 Status: SERIOUS (3)
+  HR: 234                 O2: 94
+  Resp Rate: 32   Temperature: 36
+Sending Patient 228 Data...
+Patient Data
+  Age: 12                 Status: CRITICAL (4)
+  HR: 86                  O2: 96
+  Resp Rate: 33   Temperature: 38
+Sending Patient 229 Data...
+Patient Data
+  Age: 29                 Status: GOOD (0)
+  HR: 192                 O2: 90
+  Resp Rate: 26   Temperature: 35
+Sending Patient 230 Data...
+Patient Data
+  Age: 22                 Status: CRITICAL (4)
+  HR: 74                  O2: 90
+  Resp Rate: 24   Temperature: 37
+Sending Patient 231 Data...
+Patient Data
+  Age: 52                 Status: SERIOUS (3)
+  HR: 59                  O2: 94
+  Resp Rate: 31   Temperature: 39
+Sending Patient 232 Data...
+Patient Data
+  Age: 24                 Status: STABLE (1)
+  HR: 247                 O2: 90
+  Resp Rate: 13   Temperature: 36
+Sending Patient 233 Data...
+Patient Data
+  Age: 0                  Status: CRITICAL (4)
+  HR: 197                 O2: 95
+  Resp Rate: 39   Temperature: 36
+Sending Patient 234 Data...
+Patient Data
+  Age: 68                 Status: CRITICAL (4)
+  HR: 71                  O2: 84
+  Resp Rate: 26   Temperature: 38
+Sending Patient 235 Data...
+Patient Data
+  Age: 17                 Status: GOOD (0)
+  HR: 51                  O2: 86
+  Resp Rate: 24   Temperature: 35
+Sending Patient 236 Data...
+Patient Data
+  Age: 46                 Status: GOOD (0)
+  HR: 218                 O2: 82
+  Resp Rate: 28   Temperature: 38
+Sending Patient 237 Data...
+Patient Data
+  Age: 19                 Status: GOOD (0)
+  HR: 198                 O2: 80
+  Resp Rate: 26   Temperature: 39
+Sending Patient 238 Data...
+Patient Data
+  Age: 57                 Status: FAIR (2)
+  HR: 82                  O2: 89
+  Resp Rate: 33   Temperature: 36
+Sending Patient 239 Data...
+Patient Data
+  Age: 98                 Status: STABLE (1)
+  HR: 217                 O2: 82
+  Resp Rate: 22   Temperature: 39
+Sending Patient 240 Data...
+Patient Data
+  Age: 37                 Status: CRITICAL (4)
+  HR: 102                 O2: 85
+  Resp Rate: 27   Temperature: 35
+Sending Patient 241 Data...
+Patient Data
+  Age: 34                 Status: SERIOUS (3)
+  HR: 160                 O2: 82
+  Resp Rate: 28   Temperature: 36
+Sending Patient 242 Data...
+Patient Data
+  Age: 59                 Status: STABLE (1)
+  HR: 190                 O2: 97
+  Resp Rate: 24   Temperature: 36
+Sending Patient 243 Data...
+Patient Data
+  Age: 85                 Status: SERIOUS (3)
+  HR: 221                 O2: 89
+  Resp Rate: 32   Temperature: 39
+Sending Patient 244 Data...
+Patient Data
+  Age: 0                  Status: STABLE (1)
+  HR: 44                  O2: 96
+  Resp Rate: 15   Temperature: 38
+Sending Patient 245 Data...
+Patient Data
+  Age: 38                 Status: SERIOUS (3)
+  HR: 46                  O2: 89
+  Resp Rate: 16   Temperature: 38
+Sending Patient 246 Data...
+Patient Data
+  Age: 75                 Status: STABLE (1)
+  HR: 246                 O2: 95
+  Resp Rate: 16   Temperature: 38
+Sending Patient 247 Data...
+Patient Data
+  Age: 54                 Status: GOOD (0)
+  HR: 225                 O2: 95
+  Resp Rate: 38   Temperature: 37
+Sending Patient 248 Data...
+Patient Data
+  Age: 59                 Status: STABLE (1)
+  HR: 53                  O2: 91
+  Resp Rate: 22   Temperature: 35
+Sending Patient 249 Data...
+Patient Data
+  Age: 41                 Status: SERIOUS (3)
+  HR: 186                 O2: 98
+  Resp Rate: 20   Temperature: 36
+Sending Patient 250 Data...
+Patient Data
+  Age: 63                 Status: FAIR (2)
+  HR: 80                  O2: 86
+  Resp Rate: 25   Temperature: 37
+Sending Patient 251 Data...
+Patient Data
+  Age: 86                 Status: CRITICAL (4)
+  HR: 76                  O2: 91
+  Resp Rate: 16   Temperature: 38
+Sending Patient 252 Data...
+Patient Data
+  Age: 48                 Status: SERIOUS (3)
+  HR: 163                 O2: 86
+  Resp Rate: 30   Temperature: 38
+Sending Patient 253 Data...
+Patient Data
+  Age: 50                 Status: FAIR (2)
+  HR: 223                 O2: 85
+  Resp Rate: 16   Temperature: 38
+Sending Patient 254 Data...
+Patient Data
+  Age: 60                 Status: CRITICAL (4)
+  HR: 111                 O2: 92
+  Resp Rate: 35   Temperature: 38
+Sending Patient 255 Data...
+Patient Data
+  Age: 44                 Status: SERIOUS (3)
+  HR: 90                  O2: 99
+  Resp Rate: 22   Temperature: 37
+Elapsed Time: 6.494527

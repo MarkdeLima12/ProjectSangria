@@ -8,7 +8,7 @@
 #include "headers/ringBufferAPI.h"
 #include "headers/patient.h"
 
-char *randomMessage() {
+char *randomMessage2() {
     unsigned int seed;
     int fd = open("/dev/urandom", O_RDONLY);
     read(fd, &seed, sizeof(seed));
@@ -28,7 +28,7 @@ char *randomMessage() {
             if (randDbl == 1) {
                 randValue = 6;
             } else {
-                randValue = ((int) randDbl) % 5;
+                randValue = ((int) randDbl) % 6;
             }
             break;
         case 2: randValue = (rand() % (250 - 40)) + 40;
@@ -39,7 +39,7 @@ char *randomMessage() {
             break;
         case 5: randValue = (rand() % (40 - 35)) + 35;
             break;
-        default: randValue = rand() % 5;
+        default: randValue = rand() % 7;
             randSensor = 1;
             break;
     }
@@ -47,21 +47,31 @@ char *randomMessage() {
     return randMessage;
 }
 
-int main() {
+int main2() {
     // Init variables
-    clock_t start;
+    clock_t start = clock();
     clock_t end;
     RingBuffer *ringBuffer = initBuffer();
     Patient patient[256] = {};
     char *temp = NULL;
-    double time;
+    double init = 0, write = 0, read = 0, print = 0;
     initPatient(patient);
+    end = clock();
+
+    init = (double) (end - start) / CLOCKS_PER_SEC;
+
     start = clock();
+    // Writing to the buffer
     for (int i = 0; i < 1000000; i++) {
-        temp = randomMessage();
+        temp = randomMessage2();
         bufferWrite(ringBuffer, temp);
         free(temp);
-
+    }
+    end = clock();
+    write = (double) (end - start) / CLOCKS_PER_SEC;
+    // reading and processing the data
+    start = clock();
+    for (int i = 0; i < 1000000; i++) {
         temp = bufferRead(ringBuffer);
         if (temp != NULL) {
             processData(patient, temp);
@@ -70,14 +80,20 @@ int main() {
     }
     end = clock();
 
-    time = (double) (end - start) / CLOCKS_PER_SEC;
+    read = (double) (end - start) / CLOCKS_PER_SEC;
 
+    start = clock();
     // Display Patient Data
     for (int i = 0; i < 256; i++) {
         sendData(i);
         printPatient(&patient[i]);
     }
-
-    printf("Elapsed Time: %f \n", time);
+    end = clock();
+    print = (double) (end - start) / CLOCKS_PER_SEC;
+    printf("Elapsed Time:\n");
+    printf("  Init: %f seconds\n", init);
+    printf("  Write: %f seconds\n", write);
+    printf("  Read: %f seconds\n", read);
+    printf("  Print: %f seconds\n", print);
     freeRingBuffer(&ringBuffer);
 }

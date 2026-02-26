@@ -21,7 +21,7 @@ Monitor") that captures health metrics from thousands of sensors and prepares da
 detection monitor. This component should serve as a "broker" of information, collecting the information from the
 various sensors and loading it into a queue.
 
-The core deliverable is a fixed-size, high-performance message ring buffer (`FMBuf`) with `push()`/`pop()` style
+The core deliverable is a high-performance message ring buffer (`FMBuf`) with `push()`/`pop()` style
 behavior (implemented here as write/read APIs), designed to:
 
 - sustain very high throughput under typical server workloads,
@@ -37,52 +37,27 @@ stable behavior while handling telemetry streams such as status, HR, O2, respira
 
 #### Protocol and Integration Assumptions
 
-- MQTT is the selected transport protocol for production telemetry ingestion and downstream delivery.
-- Retained messages are enabled so newly subscribed consumers receive latest-known patient state.
-- QoS 0 is the default mode for high-throughput paths; QoS 2 can be added if exactly-once delivery is required.
-- The LLM subscribes to patient update topics and publishes status updates back into ingestion.
-- Historical storage is handled by a database subscriber.
+- MQTT is still a target integration path, but this repository currently has no MQTT client/server implementation.
+- Any MQTT statements in this document are design assumptions only (not behavior implemented in `main.c` / `src/*.c`).
+- Historical persistence is assumed to be external to this module.
 
 #### Data and Processing Assumptions
 
-- Input payload format is hex-delimited: `PatientID;Sensor;Value`.
+- Input payload format in current code is slash-delimited hex: `PatientID/Sensor/Value`.
 - One message represents one metric update for one patient at one point in time.
-- If multiple physical sensors exist for the same metric, an upstream intermediary pre-aggregates to one value before
-  ingestion.
-- No data cleaning is performed in this component; values are ingested, mapped, stored, and forwarded.
-- Only sensors listed in Connected Devices are in current v1 scope.
-- If a patient dies, messages received from their sensors are no longer processed.
-- During regular production, the ring buffer will be capped at a size of 8 (64 bytes total) with the option to scale as
-  needed. The number 8 was picked because it was a nice number and didn't take up too much space, but also allowed the
-  buffer to be a suitable size for storing queued messages.
+- No input validation/cleaning is performed beyond null checks and hex parsing (`strtol(..., 16)`).
+- `processData(...)` mutates the message buffer using `strtok`, so callers must pass writable strings.
+- Sensor IDs expected by `addData(...)` are `1..5`.
+- Ring buffer capacity is currently unbounded (dynamic linked nodes). The fixed-size check is present but commented
+  out for benchmark testing.
 
 #### Runtime and Throughput Assumptions
 
-- The system is real-time adjacent (soft near-real-time), not hard real-time.
-- Benchmarking runs a generated high-volume workload (`1,000,000` messages) and measures `Init`, `Write`, `Read`, and
-  `Print` phases separately.
-- Expected scale assumption is up to `1280` concurrently reporting sensors, with publish intervals ranging from `0.1s`
-  to `3 minutes`.
-- Data is tagged with the patients ID and sensor ID. There are no ordering guarantees or requirements for ordering
-- Data Presented to the LLM is a snapshot of the most recent data collected for each stored value. The LLM will connect
-  to the DB for previous data from
-  the patient.
-- At the moment, processing capabilities are much faster than writing capabilities. Given the processing requirements of
-  the broker, buffer overflow should not be an issue. If this were to be scaled up, there would likely be the need for a
-  buffer overflow policy. The suggested implementation is to remove older data from a duplicate Sensor and Patient (e.g.
-  Sarah;HeartRate;82 would be deleted if Sarah;HeartRate;85 comes in.)
-- We will not be printing to the console, but packaging up a msg and writing to another buffer. As
-  such, printing to the terminal should not be considered in the processing stage
-- Multiple sensors are sending to one buffer and then the broker is the only one reading from the buffer.
-
-#### Open Questions (Still Unanswered)
-
-- What concurrency model is required for ingestion (`SPSC`, `MPSC`, `MPMC`)?
-- What memory ceiling (MB/GB) is acceptable under peak load?
-- What is the concrete delivery path from this module to the LLM in production (direct MQTT topic contract vs
-  intermediary API/service)?
-- Are status values validated before assignment (for example rejecting unknown enum values outside expected
-  range)?
+- Current benchmark run in `main()` generates and processes `1,000,000` messages.
+- Measurements are split into `Init`, `Write`, `Read`, and `Print` phases using `clock()`.
+- Current implementation is single-threaded; no locks/atomics are used.
+- Message ownership is copy-based on both write and read paths (extra allocation/copy overhead is expected).
+- `printPatient(...)` is part of measured output flow in current executable.
 
 ### System Overview
 
@@ -149,7 +124,7 @@ Functionality:
 - `initPatient(...)` initializes 256 patient entries.
 - `age` is initialized randomly in `[0,100]`, `status` is set to `STATUS_UNKNOWN`, and other sensor fields default to
   `255`.
-- `processData(...)` parses `PatientID;Sensor;Value` (hex-delimited) and routes updates through `addData(...)`.
+- `processData(...)` parses `PatientID/Sensor/Value` (hex-delimited) and routes updates through `addData(...)`.
 - `addData(...)` maps sensor IDs to patient fields through a `switch(type)`.
 - `printPatient(...)` prints readable patient data and displays `UNKNOWN` for fields left at `255`.
 
@@ -233,11 +208,8 @@ Design intent:
 
 Current intended MQTT behavior for this project:
 
-- MQTT retained-message module is used to maintain latest patient state visibility for subscribers.
-- QoS 0 is the standard delivery mode due to assumed high throughput; QoS 1 can be enabled for stricter delivery
-  guarantees.
-- Note: the current C implementation in this repository simulates ingestion and processing locally and does not include
-  an MQTT client library in code.
+- MQTT retained-message behavior and QoS settings are design targets, not implemented behavior in this repository.
+- Note: current C code simulates ingestion and processing locally and does not include an MQTT client library.
 
 ### Connected Devices
 
@@ -304,7 +276,7 @@ Fill in the values below after running your tests.
 | Run command                | `make run`                                                                                                |
 | Dataset size (messages)    | `1,000,000` synthetic telemetry messages                                                                  |
 | Number of patients touched | up to `256` (`Patient patient[256]`)                                                                      |
-| Message format under test  | `PatientID;Sensor;Value` (hex-delimited string payload)                                                   |
+| Message format under test  | `PatientID/Sensor/Value` (hex-delimited string payload)                                                   |
 | Sensor distribution        | randomized across sensor IDs `1..5` during message generation                                             |
 | Timing scope               | separate timings for `Init`, `Write`, `Process (Read)`, and `Print`                                       |
 | Benchmark flow             | pre-populate/write buffer, then read+process, then print all patient records                              |
@@ -312,12 +284,18 @@ Fill in the values below after running your tests.
 
 #### Results Table
 
-| Operation      | Time (secs) | Runs | Average | Min | Max | Notes |
-|----------------|------------:|-----:|--------:|----:|----:|-------|
-| Init           |             |      |         |     |     |       |
-| Write          |             |      |         |     |     |       |
-| Process (Read) |             |      |         |     |     |       |
-| Print          |             |      |         |     |     |       |
+5 runs were completed to adequately minimize the affects of anomolies in the code. Additionally, as messages are
+randomized, the increase in runs will help normalize the data, giving an accurate representation of each stage.
+Please note that each run was done with 1 million, randomly generate messages. Before each run, the compiled objects
+were cleared out, and the code was recompiled freshly. This was to maintain consistency with each run and remove any
+change in results.
+
+| Operation      | Total Time (secs) | Runs |    Average |        Min |        Max | Notes                                                                       |
+|----------------|------------------:|-----:|-----------:|-----------:|-----------:|-----------------------------------------------------------------------------|
+| Init           |         0.00024 s |    5 | 0.000047 s | 0.000029 s | 0.000058 s | Fairly consistent per run. init time will increase with scaling.            |
+| Write          |         31.7307 s |    5 |  6.34615 s |  5.99362 s |  6.85074 s | Consistent per run. Scaling won't affect per message write time.            |
+| Process (Read) |         0.52012 s |    5 |  0.10402 s |  0.13542 s |  0.13542 s | Consistent per run. Scaling won't affect per message read and process time. |
+| Print          |         0.16039 s |    5 |  0.03208 s |  0.03693 s |  0.03693 s | Consistent per run. Scaling in this area will increase with scaling.        |
 
 #### Benchmark Notes
 
@@ -347,3 +325,4 @@ some suggestions to alleviate that.
   that do specialized processing and select nodes from specific browsers.
 - One main buffer attached to a load balancer that distributes messages between a cluster brokers that process the data
   as they are handed them. This can be scaled up and down as needed.
+

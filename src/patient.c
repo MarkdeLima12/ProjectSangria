@@ -16,7 +16,7 @@ void initPatient(Patient *arr) {
     }
 
     for (int i = 0; i < 256; i++) {
-        arr[i].age = rand()%101; // random number between 0 and 100
+        arr[i].age = rand() % 101; // random number between 0 and 100
         arr[i].status = STATUS_UNKNOWN;
         arr[i].HR = 255;
         arr[i].O2 = 255;
@@ -31,15 +31,15 @@ void processData(Patient *arr, char *message) {
         return;
     }
 
-    char* ID = strtok(message, ";");
-    char* type = strtok(NULL, ";");
-    char* value = strtok(NULL, ";");
+    char *ID = strtok(message, "/");
+    char *type = strtok(NULL, "/");
+    char *value = strtok(NULL, "/");
 
     // Converts the hex strings into numbers
     int patientID = strtol(ID, NULL, 16);
     // Assume if they die, we ain't bringing em back
     if (arr[patientID].status != STATUS_DECEASED) {
-        SensorType sensType = (SensorType)strtol(type, NULL, 16);
+        SensorType sensType = (SensorType) strtol(type, NULL, 16);
         int val = strtol(value, NULL, 16);
 
         addData(&arr[patientID], sensType, &val);
@@ -58,19 +58,19 @@ void addData(Patient *patient, SensorType type, void *data) {
     }
     switch (type) {
         case STYPE_STATUS:
-            patient->status = (PatientStatus)(*(const unsigned char *)data);
+            patient->status = (PatientStatus) (*(const unsigned char *) data);
             break;
         case STYPE_HR:
-            patient->HR = *(const unsigned char *)data;
+            patient->HR = *(const unsigned char *) data;
             break;
         case STYPE_O2:
-            patient->O2 = *(const unsigned char *)data;
+            patient->O2 = *(const unsigned char *) data;
             break;
         case STYPE_RESP_RATE:
-            patient->respRate = *(const unsigned char *)data;
+            patient->respRate = *(const unsigned char *) data;
             break;
         case STYPE_TEMPERATURE:
-            patient->temp = *(const unsigned char *)data;
+            patient->temp = *(const unsigned char *) data;
             break;
         default:
             break;
@@ -89,8 +89,9 @@ void printPatient(Patient *patient) {
         "FAIR",
         "SERIOUS",
         "CRITICAL",
-        "DECEASED",
-        "UNKNOWN"
+        "UNKNOWN",
+        "DECEASED"
+
     };
     const char *statusLabel = "INVALID";
 
@@ -113,19 +114,19 @@ void printPatient(Patient *patient) {
     printf("Patient Data\n");
 
     if (patient->age == 255) printf("  Age: UNKNOWN\t\t");
-    else printf("  Age: %u\t\t", (unsigned int)patient->age);
+    else printf("  Age: %u\t\t", (unsigned int) patient->age);
 
     printf("  Status: %s (%d)\n", statusLabel, patient->status);
 
     if (patient->HR == 255) printf("  HR: UNKNOWN\t\t");
-    else printf("  HR: %u\t\t", (unsigned int)patient->HR);
+    else printf("  HR: %u\t\t", (unsigned int) patient->HR);
 
     if (patient->O2 == 255) printf("  O2: UNKNOWN\n");
-    else printf("  O2: %u\n", (unsigned int)patient->O2);\
+    else printf("  O2: %u\n", (unsigned int) patient->O2);\
 
     if (patient->respRate == 255) printf("  Resp Rate: UNKNOWN\t");
-    else printf("  Resp Rate: %u\t", (unsigned int)patient->respRate);
+    else printf("  Resp Rate: %u\t", (unsigned int) patient->respRate);
 
     if (patient->temp == 255) printf("  Temperature: UNKNOWN\n");
-    else printf("  Temperature: %u\n", (unsigned int)patient->temp);
+    else printf("  Temperature: %u\n", (unsigned int) patient->temp);
 }
