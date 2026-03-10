@@ -32,6 +32,12 @@ behavior (implemented here as write/read APIs), designed to:
 Target outcome (benchmark goal): demonstrate sustained ingestion performance toward `>= 1,000,000 messages/second`, with
 stable behavior while handling telemetry streams such as status, HR, O2, respiration rate, and temperature.
 
+### Notes
+
+- code is found in the workspace folder. use the following command in the container terminal to access the code: cd
+  ../../workspace
+- When you do an ls command, you should see all the folders and main files.
+
 ### Assumptions and Open Questions
 
 #### Protocol and Integration Assumptions
