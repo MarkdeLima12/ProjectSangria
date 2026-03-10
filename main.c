@@ -1,3 +1,16 @@
+/*
+* Purpose:
+*   Drives a full end-to-end simulation of patient sensor traffic using the ring buffer API.
+* How it works:
+*   - Initializes the ring buffer and patient table.
+*   - For 1,000,000 iterations, generates a random message, writes it, reads one message,
+*     and immediately processes it.
+*   - Prints all patient data and reports a single total elapsed time.
+* How this differs from main2.c:
+*   - This file interleaves write and read/processing in a single loop and reports only
+*     one aggregate timing value. main2.c splits init/write/read/print into separate phases
+*     and times each phase independently.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
