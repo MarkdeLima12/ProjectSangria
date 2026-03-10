@@ -1,6 +1,11 @@
-//
-// Source file for patient.h
-//
+/*
+ * Purpose:
+ *   Patient data model and processing for sensor messages.
+ * How it works:
+ *   - Initializes a 256-entry patient table with random ages and unknown vitals.
+ *   - Parses incoming "ID/TYPE/VALUE" messages and updates the matching patient.
+ *   - Provides helpers to add sensor data, simulate sending, and print status.
+ */
 #include "../headers/patient.h"
 
 #include <stdio.h>
