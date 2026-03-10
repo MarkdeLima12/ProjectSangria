@@ -1,6 +1,12 @@
-//
-// Created by markd on 2026-02-22.
-//
+/*
+ * Purpose:
+ *   Ring buffer implementation for storing and retrieving fixed-size message strings.
+ * How it works:
+ *   - Uses a circular singly-linked list of BufferNode objects.
+ *   - bufferWrite() appends a new node and advances the write pointer.
+ *   - bufferRead() copies the oldest node's message, removes it, and advances read.
+ *   - initBuffer()/freeRingBuffer() handle allocation and cleanup.
+ */
 #include "../headers/ringBufferAPI.h"
 
 #include <stdio.h>
