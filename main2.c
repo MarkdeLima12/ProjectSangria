@@ -1,3 +1,16 @@
+/*
+* Purpose:
+*   Alternative driver that profiles the ring buffer workflow in distinct phases.
+* How it works:
+*   - Times initialization, then times a full write phase (1,000,000 messages),
+*     then times a full read/process phase, then times printing all patients.
+*   - Uses the same ring buffer + patient processing pipeline, but with separated
+*     loops to make timing breakdowns clearer.
+* How this differs from main.c:
+*   - This file separates write and read/processing into distinct loops and reports
+*     per-phase timings. main.c interleaves write/read in a single loop and reports
+*     a single total duration.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
