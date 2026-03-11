@@ -109,4 +109,5 @@ int main2() {
     printf("  Read: %f seconds\n", read);
     printf("  Print: %f seconds\n", print);
     freeRingBuffer(&ringBuffer);
+    return 0;
 }

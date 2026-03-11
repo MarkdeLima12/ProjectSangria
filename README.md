@@ -41,6 +41,29 @@ stable behavior while handling telemetry streams such as status, HR, O2, respira
   command: docker
   pull socsguelph/cis2750:latest
 
+### How to Run
+
+Build and run using the Makefile targets:
+
+```sh
+make
+make run
+```
+
+Other useful targets:
+
+```sh
+make clean
+make memcheck
+make run2
+```
+
+Notes:
+
+- The default target builds the `main` executable from all `.c` files.
+- `make run` executes `./main` (which uses `main.c`).
+- `make run2` builds and runs `./main2` (compiles `main2.c` as the entrypoint).
+
 ### Assumptions and Open Questions
 
 #### Protocol and Integration Assumptions

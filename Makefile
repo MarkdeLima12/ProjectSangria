@@ -11,6 +11,7 @@ OBJ = $(SRC:.c=.o)
 
 # Output executable name
 TARGET = main
+TARGET2 = main2
 
 # Default rule
 all: $(TARGET)
@@ -25,11 +26,17 @@ $(TARGET): $(OBJ)
 
 # Cleanup
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f $(OBJ) $(TARGET) $(TARGET2)
 
 # Convenience
 run: $(TARGET)
 	./$(TARGET)
+
+$(TARGET2):
+	$(CC) $(CFLAGS) $(INCLUDES) -Dmain2=main main2.c src/*.c -o $(TARGET2)
+
+run2: $(TARGET2)
+	./$(TARGET2)
 
 memcheck: $(TARGET)
 	valgrind --leak-check=full ./$(TARGET)
