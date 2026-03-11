@@ -37,6 +37,9 @@ stable behavior while handling telemetry streams such as status, HR, O2, respira
 - code is found in the workspace folder. use the following command in the container terminal to access the code: cd
   ../../workspace
 - When you do an ls command, you should see all the folders and main files.
+- I used a docker image from an old school project to avoid container issues. To pull the image, use the following
+  command: docker
+  pull socsguelph/cis2750:latest
 
 ### Assumptions and Open Questions
 
